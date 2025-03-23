@@ -1,157 +1,131 @@
-
 import {
-    Typography, Box,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-    Chip
-} from '@mui/material';
-import DashboardCard from '@/app/(DashboardLayout)//components/shared/DashboardCard';
+  Typography,
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Chip,
+} from "@mui/material";
+import DashboardCard from "@/app/(DashboardLayout)//components/shared/DashboardCard";
 
-const products = [
-    {
-        id: "1",
-        name: "Sunil Joshi",
-        post: "Web Designer",
-        pname: "Elite Admin",
-        priority: "Low",
-        pbg: "primary.main",
-        budget: "3.9",
-    },
-    {
-        id: "2",
-        name: "Andrew McDownland",
-        post: "Project Manager",
-        pname: "Real Homes WP Theme",
-        priority: "Medium",
-        pbg: "secondary.main",
-        budget: "24.5",
-    },
-    {
-        id: "3",
-        name: "Christopher Jamil",
-        post: "Project Manager",
-        pname: "MedicalPro WP Theme",
-        priority: "High",
-        pbg: "error.main",
-        budget: "12.8",
-    },
-    {
-        id: "4",
-        name: "Nirav Joshi",
-        post: "Frontend Engineer",
-        pname: "Hosting Press HTML",
-        priority: "Critical",
-        pbg: "success.main",
-        budget: "2.4",
-    },
+// Solar panel performance data
+const solarPerformance = [
+  {
+    id: "1",
+    location: "Benban Solar Park",
+    capacity: "1650 MW",
+    status: "Operational",
+    statusColor: "success.main",
+    efficiency: "85%",
+  },
+  {
+    id: "2",
+    location: "Kom Ombo Solar Plant",
+    capacity: "200 MW",
+    status: "Under Construction",
+    statusColor: "warning.main",
+    efficiency: "-",
+  },
+  {
+    id: "3",
+    location: "Aswan Solar Farm",
+    capacity: "120 MW",
+    status: "Operational",
+    statusColor: "success.main",
+    efficiency: "88%",
+  },
+  {
+    id: "4",
+    location: "Hurghada Solar Plant",
+    capacity: "100 MW",
+    status: "Planned",
+    statusColor: "secondary.main",
+    efficiency: "-",
+  },
 ];
 
-
-const ProductPerformance = () => {
-    return (
-
-        <DashboardCard title="Product Performance">
-            <Box sx={{ overflow: 'auto', width: { xs: '280px', sm: 'auto' } }}>
-                <Table
-                    aria-label="simple table"
+const SolarPerformance = () => {
+  return (
+    <DashboardCard title="Solar Energy Performance">
+      <Box sx={{ overflow: "auto", width: { xs: "280px", sm: "auto" } }}>
+        <Table
+          aria-label="solar energy table"
+          sx={{ whiteSpace: "nowrap", mt: 2 }}
+        >
+          <TableHead>
+            <TableRow>
+              <TableCell>
+                <Typography variant="subtitle2" fontWeight={600}>
+                  ID
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="subtitle2" fontWeight={600}>
+                  Location
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="subtitle2" fontWeight={600}>
+                  Capacity
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="subtitle2" fontWeight={600}>
+                  Status
+                </Typography>
+              </TableCell>
+              <TableCell align="right">
+                <Typography variant="subtitle2" fontWeight={600}>
+                  Efficiency
+                </Typography>
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {solarPerformance.map((solar) => (
+              <TableRow key={solar.id}>
+                <TableCell>
+                  <Typography sx={{ fontSize: "15px", fontWeight: "500" }}>
+                    {solar.id}
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="subtitle2" fontWeight={600}>
+                    {solar.location}
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography
+                    color="textSecondary"
+                    variant="subtitle2"
+                    fontWeight={400}
+                  >
+                    {solar.capacity}
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Chip
                     sx={{
-                        whiteSpace: "nowrap",
-                        mt: 2
+                      px: "4px",
+                      backgroundColor: solar.statusColor,
+                      color: "#fff",
                     }}
-                >
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>
-                                <Typography variant="subtitle2" fontWeight={600}>
-                                    Id
-                                </Typography>
-                            </TableCell>
-                            <TableCell>
-                                <Typography variant="subtitle2" fontWeight={600}>
-                                    Assigned
-                                </Typography>
-                            </TableCell>
-                            <TableCell>
-                                <Typography variant="subtitle2" fontWeight={600}>
-                                    Name
-                                </Typography>
-                            </TableCell>
-                            <TableCell>
-                                <Typography variant="subtitle2" fontWeight={600}>
-                                    Priority
-                                </Typography>
-                            </TableCell>
-                            <TableCell align="right">
-                                <Typography variant="subtitle2" fontWeight={600}>
-                                    Budget
-                                </Typography>
-                            </TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {products.map((product) => (
-                            <TableRow key={product.name}>
-                                <TableCell>
-                                    <Typography
-                                        sx={{
-                                            fontSize: "15px",
-                                            fontWeight: "500",
-                                        }}
-                                    >
-                                        {product.id}
-                                    </Typography>
-                                </TableCell>
-                                <TableCell>
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                        }}
-                                    >
-                                        <Box>
-                                            <Typography variant="subtitle2" fontWeight={600}>
-                                                {product.name}
-                                            </Typography>
-                                            <Typography
-                                                color="textSecondary"
-                                                sx={{
-                                                    fontSize: "13px",
-                                                }}
-                                            >
-                                                {product.post}
-                                            </Typography>
-                                        </Box>
-                                    </Box>
-                                </TableCell>
-                                <TableCell>
-                                    <Typography color="textSecondary" variant="subtitle2" fontWeight={400}>
-                                        {product.pname}
-                                    </Typography>
-                                </TableCell>
-                                <TableCell>
-                                    <Chip
-                                        sx={{
-                                            px: "4px",
-                                            backgroundColor: product.pbg,
-                                            color: "#fff",
-                                        }}
-                                        size="small"
-                                        label={product.priority}
-                                    ></Chip>
-                                </TableCell>
-                                <TableCell align="right">
-                                    <Typography variant="h6">${product.budget}k</Typography>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </Box>
-        </DashboardCard>
-    );
+                    size="small"
+                    label={solar.status}
+                  />
+                </TableCell>
+                <TableCell align="right">
+                  <Typography variant="h6">{solar.efficiency}</Typography>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Box>
+    </DashboardCard>
+  );
 };
 
-export default ProductPerformance;
+export default SolarPerformance;

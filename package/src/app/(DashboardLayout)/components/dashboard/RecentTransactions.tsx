@@ -1,5 +1,5 @@
-
-import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
+import React from "react";
+import DashboardCard from "@/app/(DashboardLayout)/components/shared/DashboardCard";
 import {
   Timeline,
   TimelineItem,
@@ -9,94 +9,83 @@ import {
   TimelineConnector,
   TimelineContent,
   timelineOppositeContentClasses,
-} from '@mui/lab';
-import { Link, Typography } from '@mui/material';
+} from "@mui/lab";
+import { Typography } from "@mui/material";
 
-const RecentTransactions = () => {
+// Define the structure of the solar milestone data
+interface SolarMilestone {
+  year: string;
+  description: string;
+  color: "primary" | "secondary" | "success" | "warning" | "error";
+}
+
+// Solar milestones data
+const solarMilestones: SolarMilestone[] = [
+  {
+    year: "2018",
+    description: "Benban Solar Park construction started.",
+    color: "primary",
+  },
+  {
+    year: "2019",
+    description: "Egypt reached 1.6 GW solar capacity.",
+    color: "secondary",
+  },
+  {
+    year: "2020",
+    description: "Installed 500 MW new solar capacity.",
+    color: "success",
+  },
+  {
+    year: "2021",
+    description: "Benban Solar Park fully operational.",
+    color: "warning",
+  },
+  {
+    year: "2022",
+    description: "Total solar capacity surpassed 2 GW.",
+    color: "error",
+  },
+  {
+    year: "2023",
+    description: "Largest solar project announced.",
+    color: "success",
+  },
+];
+
+const SolarEnergyStatistics: React.FC = () => {
   return (
-    <DashboardCard title="Recent Transactions">
-      <>
-        <Timeline
-          className="theme-timeline"
-          nonce={undefined}
-          onResize={undefined}
-          onResizeCapture={undefined}
-          sx={{
-            p: 0,
-            mb: '-40px',
-            '& .MuiTimelineConnector-root': {
-              width: '1px',
-              backgroundColor: '#efefef'
-            },
-            [`& .${timelineOppositeContentClasses.root}`]: {
-              flex: 0.5,
-              paddingLeft: 0,
-            },
-          }}
-        >
-          <TimelineItem>
-            <TimelineOppositeContent>09:30 am</TimelineOppositeContent>
+    <DashboardCard title="Solar Energy Statistics">
+      <Timeline
+        className="theme-timeline"
+        sx={{
+          p: 0,
+          mb: "-40px",
+          "& .MuiTimelineConnector-root": {
+            width: "1px",
+            backgroundColor: "#efefef",
+          },
+          [`& .${timelineOppositeContentClasses.root}`]: {
+            flex: 0.5,
+            paddingLeft: 0,
+          },
+        }}
+      >
+        {solarMilestones.map((milestone, index) => (
+          <TimelineItem key={index}>
+            <TimelineOppositeContent>{milestone.year}</TimelineOppositeContent>
             <TimelineSeparator>
-              <TimelineDot color="primary" variant="outlined" />
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent>Payment received from John Doe of $385.90</TimelineContent>
-          </TimelineItem>
-          <TimelineItem>
-            <TimelineOppositeContent>10:00 am</TimelineOppositeContent>
-            <TimelineSeparator>
-              <TimelineDot color="secondary" variant="outlined" />
-              <TimelineConnector />
+              <TimelineDot color={milestone.color} variant="outlined" />
+              {index !== solarMilestones.length - 1 && <TimelineConnector />}
             </TimelineSeparator>
             <TimelineContent>
-              <Typography fontWeight="600">New sale recorded</Typography>{' '}
-              <Link href="/" underline="none">
-                #ML-3467
-              </Link>
+              <Typography fontWeight="600">{milestone.description}</Typography>
             </TimelineContent>
           </TimelineItem>
-          <TimelineItem>
-            <TimelineOppositeContent>12:00 am</TimelineOppositeContent>
-            <TimelineSeparator>
-              <TimelineDot color="success" variant="outlined" />
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent>Payment was made of $64.95 to Michael</TimelineContent>
-          </TimelineItem>
-          <TimelineItem>
-            <TimelineOppositeContent>09:30 am</TimelineOppositeContent>
-            <TimelineSeparator>
-              <TimelineDot color="warning" variant="outlined" />
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent>
-              <Typography fontWeight="600">New sale recorded</Typography>{' '}
-              <Link href="/" underline="none">
-                #ML-3467
-              </Link>
-            </TimelineContent>
-          </TimelineItem>
-          <TimelineItem>
-            <TimelineOppositeContent>09:30 am</TimelineOppositeContent>
-            <TimelineSeparator>
-              <TimelineDot color="error" variant="outlined" />
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent>
-              <Typography fontWeight="600">New arrival recorded</Typography>
-            </TimelineContent>
-          </TimelineItem>
-          <TimelineItem>
-            <TimelineOppositeContent>12:00 am</TimelineOppositeContent>
-            <TimelineSeparator>
-              <TimelineDot color="success" variant="outlined" />
-            </TimelineSeparator>
-            <TimelineContent>Payment Received</TimelineContent>
-          </TimelineItem>
-        </Timeline>
-      </>
+        ))}
+      </Timeline>
     </DashboardCard>
   );
 };
 
-export default RecentTransactions;
+export default SolarEnergyStatistics;
